@@ -1,0 +1,1947 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventId": "aircraft_cabin_demo",
+  "name": "Mapa de cabina de avión",
+  "currency": "MXN",
+  "locale": "es-MX",
+  "canvas": {
+    "width": 1400,
+    "height": 1200,
+    "backgroundColor": "#FAF5FF",
+    "gridSize": 20
+  },
+  "background": {
+    "src": null,
+    "x": 0,
+    "y": 0,
+    "width": 1400,
+    "height": 1200,
+    "opacity": 0.35,
+    "rotation": 0,
+    "visible": true,
+    "locked": true
+  },
+  "stage": null,
+  "ticketTypes": [
+    {
+      "id": "economy",
+      "name": "Económica",
+      "price": 2500,
+      "currency": "MXN",
+      "color": "#7C3AED",
+      "mode": "reserved_seating",
+      "capacity": 144
+    }
+  ],
+  "sections": [
+    {
+      "id": "section_left",
+      "name": "Cabina izquierda",
+      "ticketTypeId": "economy",
+      "color": "#7C3AED",
+      "x": 260,
+      "y": 150,
+      "rotation": 0,
+      "seatSize": 26,
+      "seatSpacing": 42,
+      "rowSpacing": 36,
+      "alignment": "center",
+      "visible": true,
+      "locked": false,
+      "rows": [
+        {
+          "id": "row_left_1",
+          "label": "F1",
+          "x": 0,
+          "y": 0,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_1_1",
+              "number": "F1A",
+              "label": "F1A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_1_2",
+              "number": "F1B",
+              "label": "F1B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_1_3",
+              "number": "F1C",
+              "label": "F1C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_2",
+          "label": "F2",
+          "x": 0,
+          "y": 36,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_2_1",
+              "number": "F2A",
+              "label": "F2A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_2_2",
+              "number": "F2B",
+              "label": "F2B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_2_3",
+              "number": "F2C",
+              "label": "F2C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_3",
+          "label": "F3",
+          "x": 0,
+          "y": 72,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_3_1",
+              "number": "F3A",
+              "label": "F3A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_3_2",
+              "number": "F3B",
+              "label": "F3B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_3_3",
+              "number": "F3C",
+              "label": "F3C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_4",
+          "label": "F4",
+          "x": 0,
+          "y": 108,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_4_1",
+              "number": "F4A",
+              "label": "F4A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_4_2",
+              "number": "F4B",
+              "label": "F4B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_4_3",
+              "number": "F4C",
+              "label": "F4C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_5",
+          "label": "F5",
+          "x": 0,
+          "y": 144,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_5_1",
+              "number": "F5A",
+              "label": "F5A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_5_2",
+              "number": "F5B",
+              "label": "F5B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_5_3",
+              "number": "F5C",
+              "label": "F5C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_6",
+          "label": "F6",
+          "x": 0,
+          "y": 180,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_6_1",
+              "number": "F6A",
+              "label": "F6A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_6_2",
+              "number": "F6B",
+              "label": "F6B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_6_3",
+              "number": "F6C",
+              "label": "F6C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_7",
+          "label": "F7",
+          "x": 0,
+          "y": 216,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_7_1",
+              "number": "F7A",
+              "label": "F7A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_7_2",
+              "number": "F7B",
+              "label": "F7B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_7_3",
+              "number": "F7C",
+              "label": "F7C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_8",
+          "label": "F8",
+          "x": 0,
+          "y": 252,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_8_1",
+              "number": "F8A",
+              "label": "F8A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_8_2",
+              "number": "F8B",
+              "label": "F8B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_8_3",
+              "number": "F8C",
+              "label": "F8C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_9",
+          "label": "F9",
+          "x": 0,
+          "y": 288,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_9_1",
+              "number": "F9A",
+              "label": "F9A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_9_2",
+              "number": "F9B",
+              "label": "F9B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_9_3",
+              "number": "F9C",
+              "label": "F9C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_10",
+          "label": "F10",
+          "x": 0,
+          "y": 324,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_10_1",
+              "number": "F10A",
+              "label": "F10A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_10_2",
+              "number": "F10B",
+              "label": "F10B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_10_3",
+              "number": "F10C",
+              "label": "F10C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_11",
+          "label": "F11",
+          "x": 0,
+          "y": 360,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_11_1",
+              "number": "F11A",
+              "label": "F11A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_11_2",
+              "number": "F11B",
+              "label": "F11B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_11_3",
+              "number": "F11C",
+              "label": "F11C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_12",
+          "label": "F12",
+          "x": 0,
+          "y": 396,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_12_1",
+              "number": "F12A",
+              "label": "F12A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_12_2",
+              "number": "F12B",
+              "label": "F12B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_12_3",
+              "number": "F12C",
+              "label": "F12C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_13",
+          "label": "F13",
+          "x": 0,
+          "y": 432,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_13_1",
+              "number": "F13A",
+              "label": "F13A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_13_2",
+              "number": "F13B",
+              "label": "F13B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_13_3",
+              "number": "F13C",
+              "label": "F13C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_14",
+          "label": "F14",
+          "x": 0,
+          "y": 468,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_14_1",
+              "number": "F14A",
+              "label": "F14A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_14_2",
+              "number": "F14B",
+              "label": "F14B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_14_3",
+              "number": "F14C",
+              "label": "F14C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_15",
+          "label": "F15",
+          "x": 0,
+          "y": 504,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_15_1",
+              "number": "F15A",
+              "label": "F15A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_15_2",
+              "number": "F15B",
+              "label": "F15B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_15_3",
+              "number": "F15C",
+              "label": "F15C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_16",
+          "label": "F16",
+          "x": 0,
+          "y": 540,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_16_1",
+              "number": "F16A",
+              "label": "F16A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_16_2",
+              "number": "F16B",
+              "label": "F16B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_16_3",
+              "number": "F16C",
+              "label": "F16C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_17",
+          "label": "F17",
+          "x": 0,
+          "y": 576,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_17_1",
+              "number": "F17A",
+              "label": "F17A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_17_2",
+              "number": "F17B",
+              "label": "F17B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_17_3",
+              "number": "F17C",
+              "label": "F17C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_18",
+          "label": "F18",
+          "x": 0,
+          "y": 612,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_18_1",
+              "number": "F18A",
+              "label": "F18A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_18_2",
+              "number": "F18B",
+              "label": "F18B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_18_3",
+              "number": "F18C",
+              "label": "F18C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_19",
+          "label": "F19",
+          "x": 0,
+          "y": 648,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_19_1",
+              "number": "F19A",
+              "label": "F19A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_19_2",
+              "number": "F19B",
+              "label": "F19B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_19_3",
+              "number": "F19C",
+              "label": "F19C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_20",
+          "label": "F20",
+          "x": 0,
+          "y": 684,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_20_1",
+              "number": "F20A",
+              "label": "F20A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_20_2",
+              "number": "F20B",
+              "label": "F20B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_20_3",
+              "number": "F20C",
+              "label": "F20C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_21",
+          "label": "F21",
+          "x": 0,
+          "y": 720,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_21_1",
+              "number": "F21A",
+              "label": "F21A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_21_2",
+              "number": "F21B",
+              "label": "F21B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_21_3",
+              "number": "F21C",
+              "label": "F21C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_22",
+          "label": "F22",
+          "x": 0,
+          "y": 756,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_22_1",
+              "number": "F22A",
+              "label": "F22A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_22_2",
+              "number": "F22B",
+              "label": "F22B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_22_3",
+              "number": "F22C",
+              "label": "F22C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_23",
+          "label": "F23",
+          "x": 0,
+          "y": 792,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_23_1",
+              "number": "F23A",
+              "label": "F23A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_23_2",
+              "number": "F23B",
+              "label": "F23B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_23_3",
+              "number": "F23C",
+              "label": "F23C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_left_24",
+          "label": "F24",
+          "x": 0,
+          "y": 828,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_left_24_1",
+              "number": "F24A",
+              "label": "F24A",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_24_2",
+              "number": "F24B",
+              "label": "F24B",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_left_24_3",
+              "number": "F24C",
+              "label": "F24C",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_right",
+      "name": "Cabina derecha",
+      "ticketTypeId": "economy",
+      "color": "#7C3AED",
+      "x": 820,
+      "y": 150,
+      "rotation": 0,
+      "seatSize": 26,
+      "seatSpacing": 42,
+      "rowSpacing": 36,
+      "alignment": "center",
+      "visible": true,
+      "locked": false,
+      "rows": [
+        {
+          "id": "row_right_1",
+          "label": "F1",
+          "x": 0,
+          "y": 0,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_1_1",
+              "number": "F1D",
+              "label": "F1D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_1_2",
+              "number": "F1E",
+              "label": "F1E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_1_3",
+              "number": "F1F",
+              "label": "F1F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_2",
+          "label": "F2",
+          "x": 0,
+          "y": 36,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_2_1",
+              "number": "F2D",
+              "label": "F2D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_2_2",
+              "number": "F2E",
+              "label": "F2E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_2_3",
+              "number": "F2F",
+              "label": "F2F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_3",
+          "label": "F3",
+          "x": 0,
+          "y": 72,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_3_1",
+              "number": "F3D",
+              "label": "F3D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_3_2",
+              "number": "F3E",
+              "label": "F3E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_3_3",
+              "number": "F3F",
+              "label": "F3F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_4",
+          "label": "F4",
+          "x": 0,
+          "y": 108,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_4_1",
+              "number": "F4D",
+              "label": "F4D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_4_2",
+              "number": "F4E",
+              "label": "F4E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_4_3",
+              "number": "F4F",
+              "label": "F4F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_5",
+          "label": "F5",
+          "x": 0,
+          "y": 144,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_5_1",
+              "number": "F5D",
+              "label": "F5D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_5_2",
+              "number": "F5E",
+              "label": "F5E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_5_3",
+              "number": "F5F",
+              "label": "F5F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_6",
+          "label": "F6",
+          "x": 0,
+          "y": 180,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_6_1",
+              "number": "F6D",
+              "label": "F6D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_6_2",
+              "number": "F6E",
+              "label": "F6E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_6_3",
+              "number": "F6F",
+              "label": "F6F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_7",
+          "label": "F7",
+          "x": 0,
+          "y": 216,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_7_1",
+              "number": "F7D",
+              "label": "F7D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_7_2",
+              "number": "F7E",
+              "label": "F7E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_7_3",
+              "number": "F7F",
+              "label": "F7F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_8",
+          "label": "F8",
+          "x": 0,
+          "y": 252,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_8_1",
+              "number": "F8D",
+              "label": "F8D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_8_2",
+              "number": "F8E",
+              "label": "F8E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_8_3",
+              "number": "F8F",
+              "label": "F8F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_9",
+          "label": "F9",
+          "x": 0,
+          "y": 288,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_9_1",
+              "number": "F9D",
+              "label": "F9D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_9_2",
+              "number": "F9E",
+              "label": "F9E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_9_3",
+              "number": "F9F",
+              "label": "F9F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_10",
+          "label": "F10",
+          "x": 0,
+          "y": 324,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_10_1",
+              "number": "F10D",
+              "label": "F10D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_10_2",
+              "number": "F10E",
+              "label": "F10E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_10_3",
+              "number": "F10F",
+              "label": "F10F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_11",
+          "label": "F11",
+          "x": 0,
+          "y": 360,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_11_1",
+              "number": "F11D",
+              "label": "F11D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_11_2",
+              "number": "F11E",
+              "label": "F11E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_11_3",
+              "number": "F11F",
+              "label": "F11F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_12",
+          "label": "F12",
+          "x": 0,
+          "y": 396,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_12_1",
+              "number": "F12D",
+              "label": "F12D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_12_2",
+              "number": "F12E",
+              "label": "F12E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_12_3",
+              "number": "F12F",
+              "label": "F12F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_13",
+          "label": "F13",
+          "x": 0,
+          "y": 432,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_13_1",
+              "number": "F13D",
+              "label": "F13D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_13_2",
+              "number": "F13E",
+              "label": "F13E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_13_3",
+              "number": "F13F",
+              "label": "F13F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_14",
+          "label": "F14",
+          "x": 0,
+          "y": 468,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_14_1",
+              "number": "F14D",
+              "label": "F14D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_14_2",
+              "number": "F14E",
+              "label": "F14E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_14_3",
+              "number": "F14F",
+              "label": "F14F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_15",
+          "label": "F15",
+          "x": 0,
+          "y": 504,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_15_1",
+              "number": "F15D",
+              "label": "F15D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_15_2",
+              "number": "F15E",
+              "label": "F15E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_15_3",
+              "number": "F15F",
+              "label": "F15F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_16",
+          "label": "F16",
+          "x": 0,
+          "y": 540,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_16_1",
+              "number": "F16D",
+              "label": "F16D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_16_2",
+              "number": "F16E",
+              "label": "F16E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_16_3",
+              "number": "F16F",
+              "label": "F16F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_17",
+          "label": "F17",
+          "x": 0,
+          "y": 576,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_17_1",
+              "number": "F17D",
+              "label": "F17D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_17_2",
+              "number": "F17E",
+              "label": "F17E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_17_3",
+              "number": "F17F",
+              "label": "F17F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_18",
+          "label": "F18",
+          "x": 0,
+          "y": 612,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_18_1",
+              "number": "F18D",
+              "label": "F18D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_18_2",
+              "number": "F18E",
+              "label": "F18E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_18_3",
+              "number": "F18F",
+              "label": "F18F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_19",
+          "label": "F19",
+          "x": 0,
+          "y": 648,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_19_1",
+              "number": "F19D",
+              "label": "F19D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_19_2",
+              "number": "F19E",
+              "label": "F19E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_19_3",
+              "number": "F19F",
+              "label": "F19F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_20",
+          "label": "F20",
+          "x": 0,
+          "y": 684,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_20_1",
+              "number": "F20D",
+              "label": "F20D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_20_2",
+              "number": "F20E",
+              "label": "F20E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_20_3",
+              "number": "F20F",
+              "label": "F20F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_21",
+          "label": "F21",
+          "x": 0,
+          "y": 720,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_21_1",
+              "number": "F21D",
+              "label": "F21D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_21_2",
+              "number": "F21E",
+              "label": "F21E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_21_3",
+              "number": "F21F",
+              "label": "F21F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_22",
+          "label": "F22",
+          "x": 0,
+          "y": 756,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_22_1",
+              "number": "F22D",
+              "label": "F22D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_22_2",
+              "number": "F22E",
+              "label": "F22E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_22_3",
+              "number": "F22F",
+              "label": "F22F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_23",
+          "label": "F23",
+          "x": 0,
+          "y": 792,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_23_1",
+              "number": "F23D",
+              "label": "F23D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_23_2",
+              "number": "F23E",
+              "label": "F23E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_23_3",
+              "number": "F23F",
+              "label": "F23F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        },
+        {
+          "id": "row_right_24",
+          "label": "F24",
+          "x": 0,
+          "y": 828,
+          "seatCount": 3,
+          "numberStart": 1,
+          "numberDirection": "asc",
+          "alignment": "center",
+          "seats": [
+            {
+              "id": "seat_right_24_1",
+              "number": "F24D",
+              "label": "F24D",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_24_2",
+              "number": "F24E",
+              "label": "F24E",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            },
+            {
+              "id": "seat_right_24_3",
+              "number": "F24F",
+              "label": "F24F",
+              "x": 0,
+              "y": 0,
+              "status": "available",
+              "accessible": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "venueType": "aircraft"
+  }
+}

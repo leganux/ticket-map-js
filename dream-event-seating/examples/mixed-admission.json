@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventId": "mixed-admission",
+  "name": "Evento de admisión mixta",
+  "currency": "MXN",
+  "locale": "es-MX",
+  "canvas": {
+    "width": 1400,
+    "height": 900,
+    "backgroundColor": "#F8FAFC",
+    "gridSize": 20
+  },
+  "stage": {
+    "id": "stage_demo",
+    "label": "ESCENARIO",
+    "shape": "rectangle",
+    "x": 450,
+    "y": 40,
+    "width": 500,
+    "height": 90,
+    "rotation": 0,
+    "color": "#1E293B",
+    "visible": true,
+    "locked": false
+  },
+  "ticketTypes": [
+    {
+      "id": "ticket_vip",
+      "name": "VIP",
+      "price": 1500,
+      "currency": "MXN",
+      "color": "#8B5CF6",
+      "mode": "reserved_seating",
+      "capacity": 60
+    },
+    {
+      "id": "ticket_general",
+      "name": "General",
+      "price": 500,
+      "currency": "MXN",
+      "color": "#3B82F6",
+      "mode": "general_admission",
+      "capacity": 300
+    }
+  ],
+  "sections": [],
+  "metadata": {}
+}

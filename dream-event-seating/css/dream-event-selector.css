@@ -1,0 +1,6 @@
+.de-selector {
+  box-shadow: 0 8px 24px #0f172a0d;
+}
+.de-selector button:disabled {
+  cursor: not-allowed;
+}

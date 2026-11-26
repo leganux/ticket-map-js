@@ -1,0 +1,13 @@
+{
+  "name": "ticket-map-js",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dream Event seat map components",
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,css}\" --ignore-unknown",
+    "format:check": "prettier --check \"**/*.{js,css}\" --ignore-unknown"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}
