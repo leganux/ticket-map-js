@@ -27,6 +27,8 @@ for (const file of [
   'dream-event-schema.js',
   'dream-event-layout.js',
   'dream-event-seat-selector.js',
+  'dream-event-templates.js',
+  'dream-event-seat-selector-mobile.js',
 ])
   vm.runInContext(fs.readFileSync(path.join(__dirname, '../js', file), 'utf8'), context, {
     filename: file,
@@ -102,7 +104,7 @@ test('JSON normalization preserves ids and provides default schema fields', () =
   assert.equal(n.sections[0].rows[0].seats[0].id, 's1');
   assert.equal(n.schemaVersion, '1.0.0');
 });
-test('new maps allow no stage and normalize stage colors to purple', () => {
+test('new maps allow no stage and stages default to purple', () => {
   assert.equal(S.createEmpty().stage, null);
   const map = S.normalize({
     stage: { id: 'center-stage', x: 300, y: 300, width: 400, height: 80 },
@@ -150,6 +152,117 @@ test('selector emits expected ticket counts and accurate minor-unit totals', () 
   assert.equal(value.ticketCount, 3);
   assert.equal(value.total, 3500);
   assert.equal(U.toMinor(value.total), 350000);
+});
+test('semicircle rows are concentric arcs that do not cross', () => {
+  const sec = S.normalize({
+    sections: [
+      {
+        id: 'arc',
+        shape: 'semicircle',
+        seatSpacing: 34,
+        rowSpacing: 34,
+        rows: [10, 12, 14].map((n, i) => ({
+          id: 'r' + i,
+          y: i * 34,
+          seats: Array.from({ length: n }, (_, j) => ({ id: `a${i}_${j}`, number: j + 1 })),
+        })),
+      },
+    ],
+  }).sections[0];
+  const centers = sec.rows.map((row) => {
+    const seats = L.distribute(row, sec);
+    const mid = seats[Math.floor(seats.length / 2)];
+    assert(seats[0].y < mid.y, 'row ends curve toward the stage');
+    return mid.y + row.y;
+  });
+  assert(centers[0] < centers[1] && centers[1] < centers[2]);
+});
+test('presale price applies until its end date, then the regular price', () => {
+  const ticket = { id: 'vip', price: 150, presalePrice: 120, presaleEndsAt: '2027-01-31T23:59:00Z' };
+  assert.equal(U.ticketPrice(ticket, Date.parse('2027-01-15T00:00:00Z')).price, 120);
+  assert.equal(U.ticketPrice(ticket, Date.parse('2027-02-01T00:00:00Z')).price, 150);
+  assert.equal(U.ticketPrice({ price: 150 }, Date.now()).presale, false);
+  const dayOnly = { price: 10, presalePrice: 5, presaleEndsAt: '2027-01-31' };
+  assert.equal(U.ticketPrice(dayOnly, new Date(2027, 0, 31, 22, 0).getTime()).price, 5);
+});
+test('selector totals use presale prices and report savings', () => {
+  const map = S.normalize(data);
+  map.ticketTypes[0].presalePrice = 1200;
+  map.ticketTypes[0].presaleEndsAt = '2030-01-01T00:00:00Z';
+  const x = Object.create(Selector.prototype);
+  x.data = map;
+  x.options = { currency: 'MXN', now: Date.parse('2029-06-01T00:00:00Z') };
+  x.selection = new Set(['s1', 's2']);
+  x.generalAdmission = { ga: 1 };
+  let value = x.getSelection();
+  assert.equal(value.total, 2900);
+  assert.equal(value.savings, 600);
+  assert.equal(value.seats[0].pricing, 'presale');
+  x.options.now = Date.parse('2030-02-01T00:00:00Z');
+  value = x.getSelection();
+  assert.equal(value.total, 3500);
+  assert.equal(value.savings, 0);
+});
+test('validation rejects presale above the regular price or without an end date', () => {
+  const map = S.normalize(data);
+  map.ticketTypes[0].presalePrice = 2000;
+  map.ticketTypes[1].presalePrice = 100;
+  const errors = S.validate(map).map((e) => e.message);
+  assert(errors.includes('La preventa no puede costar más que el precio normal'));
+  assert(errors.includes('Fecha de fin de preventa inválida'));
+});
+test('every template builds a valid, priced map with unique seat ids', () => {
+  const T = context.DreamEventTemplates;
+  assert(T.list().length >= 12);
+  T.list().forEach(({ id }) => {
+    const map = S.normalize(T.get(id));
+    assert.deepEqual(S.validate(map), [], id);
+    assert(map.ticketTypes.every((t) => t.price > 0), id + ' prices');
+    const seats = U.eachSeat(map);
+    assert(seats.length > 0, id + ' seats');
+    assert.equal(new Set(seats.map((x) => x.seat.id)).size, seats.length, id + ' ids');
+    assert(T.preview(map).startsWith('<svg'), id + ' preview');
+  });
+});
+test('ring sections place every row on a full circle around the section origin', () => {
+  const map = S.normalize(context.DreamEventTemplates.get('stadium-4'));
+  const ring = map.sections[0];
+  ring.rows.forEach((row, r) => {
+    const expected = ring.innerRadius + r * ring.rowSpacing;
+    L.distribute(row, ring).forEach((seat) => {
+      const d = Math.hypot(seat.x + row.x, seat.y + row.y);
+      assert(Math.abs(d - expected) < 0.01);
+    });
+  });
+});
+test('purchase picker detects phones as mobile and PCs / iPads as desktop', () => {
+  const detect = context.DreamEventSeatPicker.detectMode;
+  const win = (ua, w, h, coarse) => ({
+    navigator: { userAgent: ua },
+    innerWidth: w,
+    innerHeight: h,
+    matchMedia: (q) => ({ matches: coarse && q.includes('coarse') }),
+  });
+  const iphone = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) Mobile/15E148 Safari/604.1';
+  const android = 'Mozilla/5.0 (Linux; Android 14; Pixel 8) Chrome/131.0 Mobile Safari/537.36';
+  const ipad = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Version/17.0 Safari/605.1.15';
+  const pc = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/131.0 Safari/537.36';
+  assert.equal(detect(win(iphone, 390, 844, true)), 'mobile');
+  assert.equal(detect(win(iphone, 844, 390, true)), 'mobile');
+  assert.equal(detect(win(android, 412, 915, true)), 'mobile');
+  assert.equal(detect(win(ipad, 820, 1180, true)), 'desktop');
+  assert.equal(detect(win(pc, 1440, 900, false)), 'desktop');
+  assert.equal(detect(win(pc, 500, 900, false)), 'mobile');
+});
+test('mobile selector shares the desktop pricing and selection logic', () => {
+  const M = context.DreamEventSeatSelectorMobile;
+  assert(Object.getPrototypeOf(M.prototype) === Selector.prototype);
+  const x = Object.create(M.prototype);
+  x.data = S.normalize(data);
+  x.options = { currency: 'MXN' };
+  x.selection = new Set(['s1']);
+  x.generalAdmission = {};
+  assert.equal(x.getSelection().total, 1500);
 });
 test('large map example contains 1,000 seats', () => {
   const large = JSON.parse(fs.readFileSync(path.join(__dirname, '../examples/large-venue.json')));

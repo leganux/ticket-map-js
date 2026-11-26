@@ -1,67 +1,130 @@
 # Dream Event Seating
 
-Dos componentes de navegador para crear mapas de asientos y seleccionar boletos. Esta carpeta funciona sin backend, paquetes npm ni compilación. El repositorio original no tenía componentes ni dependencias de frontend; por eso todo quedó aislado aquí.
+Componentes de navegador para **diseñar mapas de asientos** y **vender boletos sobre ellos**. Funcionan sin backend, sin npm y sin compilación: solo archivos JS/CSS y un JSON con el mapa.
 
-## Inicio rápido
+| Componente | Para quién | Qué hace |
+| --- | --- | --- |
+| **Builder** (`DreamEventSeatMapBuilder`) | Organizador | Diseña el recinto: secciones, filas, asientos, escenario, precios, preventa y templates. Produce el JSON del mapa. |
+| **Compra** (`DreamEventSeatPicker`) | Comprador | Muestra el mapa, deja elegir asientos, calcula el total (con preventa) y hace una reserva simulada. Elige solo la versión **escritorio** (PC, iPad) o **móvil** (teléfono). |
 
-Desde esta carpeta, sirve los archivos con cualquier servidor estático. Por ejemplo:
+![Builder: mapa de asientos con sección seleccionada](docs/images/builder-overview.png)
 
-```sh
-python3 -m http.server 8080
-```
+<p align="center">
+  <img src="docs/images/mobile-cart.png" width="260" alt="Compra en móvil: carrito con preventa">
+  &nbsp;
+  <img src="docs/images/mobile-flow.gif" width="260" alt="Compra en móvil: animación del flujo">
+</p>
 
-Abre `http://localhost:8080/` para la demostración integrada. Se requieren conexión a internet y CDN para Bootstrap 5.3.3, jQuery 3.7.1, Konva 9.3.18, SweetAlert2 11 y Font Awesome 6.7.2. Se pueden descargar esas dependencias y cambiar las etiquetas `<script>` y `<link>` por rutas locales.
+## Guías
 
-## Integración
+- **[Guía del Builder](docs/GUIA-BUILDER.md)**: instalación, cada pestaña y herramienta, templates, preventa, atajos, API y callbacks.
+- **[Guía de compra (escritorio y móvil)](docs/GUIA-COMPRA.md)**: detección automática, flujo del comprador, disponibilidad, reservas, API y callbacks.
+- **[Esquema JSON](JSON-SCHEMA.md)**: formato del mapa y lista de métodos.
 
-Incluye los scripts en este orden: `dream-event-utils.js`, `dream-event-schema.js`, `dream-event-layout.js`, `dream-event-history.js` (solo Builder), `dream-event-renderer.js`, y el componente que se vaya a usar. El Selector no requiere jQuery ni los scripts exclusivos del Builder.
+## Inicio rápido (5 minutos)
+
+1. Sirve esta carpeta con cualquier servidor estático:
+
+   ```sh
+   cd dream-event-seating
+   python3 -m http.server 8080
+   ```
+
+2. Abre las demos:
+
+   | URL | Qué muestra |
+   | --- | --- |
+   | `http://localhost:8080/builder-demo.html` | Builder con el ejemplo del concierto |
+   | `http://localhost:8080/selector-demo.html` | Compra con selector de mapa/template y de vista (auto, escritorio, móvil) |
+   | `http://localhost:8080/` | Builder + compra + inspector JSON en pestañas |
+   | `http://localhost:8080/tests/` | Pruebas en navegador |
+
+3. Copia a tu proyecto la carpeta `js/` y `css/` y sigue la guía del componente que necesites.
+
+### Builder en tu página
 
 ```html
-<div id="seat-map-builder"></div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="css/dream-event-builder.css">
+
+<div id="builder"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/konva@9.3.18/konva.min.js"></script>
+<script src="js/dream-event-utils.js"></script>
+<script src="js/dream-event-schema.js"></script>
+<script src="js/dream-event-layout.js"></script>
+<script src="js/dream-event-history.js"></script>
+<script src="js/dream-event-renderer.js"></script>
+<script src="js/dream-event-templates.js"></script>
+<script src="js/dream-event-seat-map-builder.js"></script>
 <script>
-const builder = new DreamEventSeatMapBuilder({
-  container: '#seat-map-builder',
-  data: initialJSON,
-  options: { locale: 'es-MX', currency: 'MXN', historyLimit: 50 },
-  callbacks: { onChange: json => console.log(json), onComplete: json => sendToYourApp(json) }
-});
+  const builder = new DreamEventSeatMapBuilder({
+    container: '#builder',
+    data: mapaGuardado, // o {} para empezar vacío / con un template
+    callbacks: { onComplete: (mapa) => fetch('/api/mapa', { method: 'POST', body: JSON.stringify(mapa) }) },
+  });
 </script>
 ```
 
-El Selector consume directamente `builder.getData()`:
+### Compra en tu página (detecta móvil o escritorio)
 
-```js
-const selector = new DreamEventSeatSelector({
-  container: '#seat-map-selector', data: builder.getData(),
-  availability: { seats: {}, generalAdmission: {} },
-  options: { maxSeats: 6, minSeats: 1, holdDurationSeconds: 600 },
-  callbacks: { onSelectionChange: selection => console.log(selection), onHoldCreated: reservation => console.log(reservation) }
-});
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/dream-event-common.css">
+<link rel="stylesheet" href="css/dream-event-selector.css">
+<link rel="stylesheet" href="css/dream-event-mobile.css">
+
+<div id="compra"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/konva@9.3.18/konva.min.js"></script>
+<script src="js/dream-event-utils.js"></script>
+<script src="js/dream-event-schema.js"></script>
+<script src="js/dream-event-layout.js"></script>
+<script src="js/dream-event-renderer.js"></script>
+<script src="js/dream-event-seat-selector.js"></script>
+<script src="js/dream-event-seat-selector-mobile.js"></script>
+<script>
+  const compra = DreamEventSeatPicker.create({
+    container: '#compra',
+    data: mapa,                                // el JSON que produjo el Builder
+    availability: { seats: { seat_a1: 'sold' }, generalAdmission: {} },
+    options: { maxSeats: 6 },
+    callbacks: { onHoldCreated: (reserva) => console.log(reserva) },
+  });
+</script>
 ```
 
-Ambos componentes exponen los métodos descritos en `JSON-SCHEMA.md` y en el código mediante JSDoc. La API principal cubre importación/exportación, validación, grupos, filas, asientos, admisión general, selección, temporizador y destrucción. La edición rápida de filas se hace desde el panel de sección; la edición visual permite arrastrar y transformar el escenario y mover secciones.
+## Qué hay en cada archivo
 
-## Archivos
+| Archivo | Uso |
+| --- | --- |
+| `js/dream-event-utils.js` | Utilidades, dinero y precio vigente (preventa). |
+| `js/dream-event-schema.js` | Valores por defecto, normalización y validación del JSON. |
+| `js/dream-event-layout.js` | Geometría: filas rectas, curvas, semicírculos, anillos y mesas. |
+| `js/dream-event-history.js` | Deshacer/rehacer (solo Builder). |
+| `js/dream-event-renderer.js` | Dibujo Konva compartido: chips de asientos, zoom, pellizco, selección. |
+| `js/dream-event-templates.js` | 12 recintos prediseñados (opcional, solo Builder). |
+| `js/dream-event-seat-map-builder.js` | Builder. |
+| `js/dream-event-seat-selector.js` | Compra en escritorio (`DreamEventSeatSelector`). |
+| `js/dream-event-seat-selector-mobile.js` | Compra móvil (`DreamEventSeatSelectorMobile`) y detector automático (`DreamEventSeatPicker`). |
+| `css/dream-event-builder.css` | Estilos del Builder (`.deb`). |
+| `css/dream-event-common.css`, `css/dream-event-selector.css` | Estilos de compra en escritorio. |
+| `css/dream-event-mobile.css` | Estilos de compra móvil (`.dem`). |
+| `examples/` | Mapas de ejemplo (`concert.json` con preventa, `large-venue.json` con 1,000 asientos, etc.). |
+| `docs/` | Guías, capturas (`docs/images/`) y el script que las regenera (`docs/tools/capture.mjs`). |
 
-- `js/dream-event-schema.js`: valores iniciales, normalización y validación.
-- `js/dream-event-layout.js`: geometría de asientos en coordenadas relativas.
-- `js/dream-event-renderer.js`: escena compartida Konva.
-- `js/dream-event-seat-map-builder.js`: asistente, edición, historial en memoria y exportación JSON.
-- `js/dream-event-seat-selector.js`: selección, admisión general, disponibilidad y reserva simulada.
-- `index.html`: pestañas de configurador, selector e inspector.
-- `builder-demo.html`, `selector-demo.html`, `integration-demo.html`: demos independientes y de integración.
-- `examples/`: mapas de ejemplo, incluido uno de 1,000 asientos.
-- `tests/`: pruebas Node y una página de pruebas en navegador.
+## Dependencias
 
-## Disponibilidad y dinero
+Por CDN: Konva 9.3.18 (obligatoria), SweetAlert2 11 (confirmaciones del Builder y avisos en escritorio; el Builder funciona sin ella con `confirm()` nativo), Font Awesome 6.7.2 (iconos) y Bootstrap 5.3.3 (solo la compra en escritorio). Puedes descargarlas y servirlas localmente.
 
-`ticketTypes[].price` usa unidades monetarias mayores (por ejemplo, `1500` MXN). El Selector calcula los totales convirtiendo a centavos enteros y devuelve los valores monetarios en las unidades del JSON de ejemplo. `availability.seats` recibe un objeto `{ seatId: status }`. Los estados dinámicos se mantienen separados de la definición del mapa.
+## Dinero y seguridad
 
-## Límites de la simulación
-
-La reserva vive únicamente en la memoria de esta instancia y pestaña; no bloquea inventario para otros compradores. El navegador no es autoridad para precios, capacidad, disponibilidad, expiración ni pagos. En producción el servidor debe validar y autorizar cada operación. El contador usa timestamps absolutos. La referencia de plano cargada localmente queda como Data URL dentro del JSON exportado.
-
-El renderizado usa una forma Konva por asiento, conveniente para edición y mapas de tamaño medio. No se hizo una prueba de rendimiento para 5,000 o 10,000 asientos ni se prometen FPS. El ejemplo grande permite comprobar la carga inicial y la distribución de 1,000 asientos.
+- `ticketTypes[].price` y `presalePrice` están en unidades mayores (`1500` = $1,500 MXN). Los totales se suman en centavos enteros.
+- La reserva es **simulada y local**: no bloquea asientos para otros compradores ni cobra. El navegador no es autoridad sobre precios, fechas de preventa, disponibilidad ni pagos: tu servidor debe validar y cobrar.
+- `availability` (vendido/apartado) va separado del mapa; se actualiza con `setAvailability()` o `updateSeatStatus()`.
 
 ## Pruebas
 
@@ -69,12 +132,10 @@ El renderizado usa una forma Konva por asiento, conveniente para edición y mapa
 node tests/run.js
 ```
 
-Para probar integración visual, sirve la carpeta por HTTP y visita `tests/index.html`.
+## Regenerar capturas y GIFs
 
-## Configuración del mapa
+Con el servidor en marcha y Chrome + ffmpeg instalados:
 
-Los tipos de boleto llegan preconfigurados en data.ticketTypes. El Builder no muestra un selector de tipos: asigna automáticamente a cada sección el tipo de asiento reservado disponible. La pestaña Secciones concentra su creación y edición, incluidas filas, asientos, color y contorno (rectangular, cuadrado, trapezoidal, semicircular o circular). Arrastrar los controles del contorno escala juntos la sección y sus asientos. El plano cargado se puede encuadrar con Ajustar al plano.
-
-El escenario es opcional y puede ser null. En aviones y recintos sin escenario se deja vacío; en estadios se agrega desde el paso Escenario, aparece centrado por defecto y después se puede mover. Las secciones se arrastran y escalan como grupos. Para mover varios asientos, selecciónalos con Shift+clic o Ctrl/⌘+clic y arrastra cualquiera de los seleccionados.
-
-El Builder utiliza SweetAlert2 para formularios, confirmaciones y avisos. Carga SweetAlert2 antes del script del componente. La demostración incluye la dependencia por CDN.
+```sh
+node docs/tools/capture.mjs
+```
