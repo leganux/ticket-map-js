@@ -49,7 +49,6 @@
           data.stage,
         )
       : null;
-    if (data.stage) data.stage.color = '#5B21B6';
     data.ticketTypes = (data.ticketTypes || []).map((t) =>
       Object.assign(
         {
@@ -60,6 +59,8 @@
           currency: data.currency,
           color: '#7C3AED',
           mode: 'reserved_seating',
+          presalePrice: null,
+          presaleEndsAt: null,
         },
         t,
         { name: U.text(t.name), description: U.text(t.description) },
@@ -162,6 +163,15 @@
       if (!U.text(t.name)) add(`ticketTypes[${i}].name`, 'Nombre requerido');
       if (!Number.isFinite(+t.price) || +t.price < 0)
         add(`ticketTypes[${i}].price`, 'Precio inválido');
+      const hasPresalePrice = t.presalePrice != null && t.presalePrice !== '';
+      if (hasPresalePrice || t.presaleEndsAt) {
+        if (!hasPresalePrice || !Number.isFinite(+t.presalePrice) || +t.presalePrice < 0)
+          add(`ticketTypes[${i}].presalePrice`, 'Precio de preventa inválido');
+        else if (Number.isFinite(+t.price) && +t.presalePrice > +t.price)
+          add(`ticketTypes[${i}].presalePrice`, 'La preventa no puede costar más que el precio normal');
+        if (!Number.isFinite(U.presaleEnd(t)))
+          add(`ticketTypes[${i}].presaleEndsAt`, 'Fecha de fin de preventa inválida');
+      }
       if (!['reserved_seating', 'general_admission'].includes(t.mode))
         add(`ticketTypes[${i}].mode`, 'Modalidad inválida');
     });

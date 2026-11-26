@@ -34,7 +34,7 @@
     U.emit(this.callbacks, 'onReady', this.getData());
   }
   Selector.prototype.render = function () {
-    this.container.innerHTML = `<div class="de-selector"><div class="de-selector-head"><div><h4>${U.escape(this.data.name)}</h4><small>Selecciona asientos y confirma una reserva simulada.</small></div><div class="d-flex gap-2"><select class="form-select form-select-sm de-filter-ticket"><option value="">Todos los boletos</option>${this.data.ticketTypes.map((t) => `<option value="${U.escape(t.id)}">${U.escape(t.name)}</option>`).join('')}</select><select class="form-select form-select-sm de-filter-section"><option value="">Todas las secciones</option>${this.data.sections.map((s) => `<option value="${U.escape(s.id)}">${U.escape(s.name)}</option>`).join('')}</select><button class="btn btn-sm btn-outline-secondary" data-action="fit">Centrar</button><button class="btn btn-sm btn-outline-secondary" data-action="zoom-in" aria-label="Acercar">+</button><button class="btn btn-sm btn-outline-secondary" data-action="zoom-out" aria-label="Alejar">−</button></div></div><div class="de-selector-map"></div><div class="de-selector-bottom"><div class="de-legend">${[
+    this.container.innerHTML = `<div class="de-selector"><div class="de-selector-head"><div><h4>${U.escape(this.data.name)}</h4><small>Selecciona asientos y confirma una reserva simulada.</small>${this.presaleBanner()}</div><div class="d-flex gap-2"><select class="form-select form-select-sm de-filter-ticket"><option value="">Todos los boletos</option>${this.data.ticketTypes.map((t) => `<option value="${U.escape(t.id)}">${U.escape(t.name)}</option>`).join('')}</select><select class="form-select form-select-sm de-filter-section"><option value="">Todas las secciones</option>${this.data.sections.map((s) => `<option value="${U.escape(s.id)}">${U.escape(s.name)}</option>`).join('')}</select><button class="btn btn-sm btn-outline-secondary" data-action="fit">Centrar</button><button class="btn btn-sm btn-outline-secondary" data-action="zoom-in" aria-label="Acercar">+</button><button class="btn btn-sm btn-outline-secondary" data-action="zoom-out" aria-label="Alejar">−</button></div></div><div class="de-selector-map"></div><div class="de-selector-bottom"><div class="de-legend">${[
       ['available', 'Disponible'],
       ['selected', 'Seleccionado'],
       ['held', 'Reservado'],
@@ -46,7 +46,7 @@
       .filter((t) => t.mode === 'general_admission')
       .map(
         (t) =>
-          `<label>${U.escape(t.name)} · ${U.money(U.toMinor(t.price), t.currency || this.data.currency)}<input type="number" min="0" value="0" class="form-control form-control-sm" data-ga="${U.escape(t.id)}"></label>`,
+          `<label>${U.escape(t.name)} · ${this.priceLabel(t)}<input type="number" min="0" value="0" class="form-control form-control-sm" data-ga="${U.escape(t.id)}"></label>`,
       )
       .join(
         '',
@@ -54,10 +54,12 @@
     this.renderer = new root.DreamEventRenderer(this.container.querySelector('.de-selector-map'), {
       pan: true,
       labels: true,
+      now: () => this.now(),
       onSeat: (id, meta, status) => {
         this.toggleSeat(id);
-        this.container.querySelector('.de-seat-detail').textContent =
-          `${meta.sectionName} · Fila ${meta.rowLabel} · Asiento ${meta.number} · ${meta.ticketTypeName} · ${U.money(U.toMinor(meta.price), meta.currency)}`;
+        const ticket = this.data.ticketTypes.find((t) => t.id === meta.ticketTypeId) || {};
+        this.container.querySelector('.de-seat-detail').innerHTML =
+          `${U.escape(meta.sectionName)} · Fila ${U.escape(meta.rowLabel)} · Asiento ${U.escape(meta.number)} · ${U.escape(meta.ticketTypeName)} · ${this.priceLabel(ticket)}`;
       },
     });
     this.draw();
@@ -186,7 +188,9 @@
           seatNumber: f.seat.number,
           ticketTypeId: t.id,
           ticketTypeName: t.name,
-          unitPrice: +t.price || 0,
+          unitPrice: this.priceOf(t).price,
+          regularPrice: this.priceOf(t).regularPrice,
+          pricing: this.priceOf(t).presale ? 'presale' : 'regular',
         };
       })
       .filter(Boolean);
@@ -194,17 +198,23 @@
       .filter(([, quantity]) => quantity > 0)
       .map(([ticketTypeId, quantity]) => {
         const t = this.data.ticketTypes.find((x) => x.id === ticketTypeId) || {};
+        const p = this.priceOf(t);
         return {
           ticketTypeId,
           quantity,
-          unitPrice: +t.price || 0,
-          subtotal: quantity * (+t.price || 0),
+          unitPrice: p.price,
+          regularPrice: p.regularPrice,
+          pricing: p.presale ? 'presale' : 'regular',
+          subtotal: (quantity * U.toMinor(p.price)) / 100,
         };
       });
     const minor =
         seats.reduce((n, x) => n + U.toMinor(x.unitPrice), 0) +
         ga.reduce((n, x) => n + U.toMinor(x.subtotal), 0),
       total = minor / 100;
+    const regularMinor =
+      seats.reduce((n, x) => n + U.toMinor(x.regularPrice), 0) +
+      ga.reduce((n, x) => n + x.quantity * U.toMinor(x.regularPrice), 0);
     return {
       eventId: this.data.eventId,
       currency: this.options.currency,
@@ -213,6 +223,7 @@
       seats,
       generalAdmission: ga,
       subtotal: total,
+      savings: Math.max(0, regularMinor - minor) / 100,
       total,
     };
   };
@@ -255,6 +266,34 @@
     this.changed();
     return true;
   };
+  /** Current time used for presale pricing; `options.now` may be a Date, ms or a function. */
+  Selector.prototype.now = function () {
+    const n = this.options && this.options.now;
+    if (typeof n === 'function') return +n();
+    return n != null ? +n : Date.now();
+  };
+  Selector.prototype.priceOf = function (ticket) {
+    return U.ticketPrice(ticket, this.now());
+  };
+  Selector.prototype.money = function (amount, currency) {
+    return U.money(U.toMinor(amount), currency || this.options.currency, this.options.locale);
+  };
+  /** HTML price for a ticket: presale price with the regular one struck through when active. */
+  Selector.prototype.priceLabel = function (ticket) {
+    const p = this.priceOf(ticket);
+    if (!p.presale) return this.money(p.price, ticket.currency);
+    return `<b class="de-presale-price">${this.money(p.price, ticket.currency)}</b> <s class="text-secondary">${this.money(p.regularPrice, ticket.currency)}</s> <span class="de-presale-tag">Preventa</span>`;
+  };
+  Selector.prototype.presaleBanner = function () {
+    const active = this.data.ticketTypes.filter((t) => this.priceOf(t).presale);
+    if (!active.length) return '';
+    return `<div class="de-presale-banner"><i class="fa-solid fa-tag"></i> ${active
+      .map(
+        (t) =>
+          `<span><b>${U.escape(t.name)}</b> en preventa: ${this.priceLabel(t)} hasta ${U.escape(U.formatDate(t.presaleEndsAt, this.options.locale))}</span>`,
+      )
+      .join('')}</div>`;
+  };
   Selector.prototype.getTotal = function () {
     return this.getSelection().total;
   };
@@ -262,13 +301,19 @@
     return U.toMinor(this.getSelection().total);
   };
   Selector.prototype.changed = function () {
-    this.draw();
+    // Selection changes only restyle seats; the scene is not rebuilt.
+    if (this.renderer && this.renderer.data) {
+      this.renderer.setSelectedSeats(this.selection);
+      this.updateSummary();
+    } else this.draw();
     U.emit(this.callbacks, 'onSelectionChange', this.getSelection());
   };
   Selector.prototype.updateSummary = function () {
     if (!this.container.querySelector('[data-total]')) return;
+    const savings = this.getSelection().savings;
     this.container.querySelector('[data-total]').textContent =
-      `Subtotal: ${U.money(this.getTotalMinor(), this.options.currency, this.options.locale)}`;
+      `Subtotal: ${U.money(this.getTotalMinor(), this.options.currency, this.options.locale)}` +
+      (savings > 0 ? ` · ahorras ${this.money(savings)} por preventa` : '');
     this.container.querySelector('[data-selection-label]').textContent =
       `${this.selection.size} asientos seleccionados`;
     this.container.querySelector('[data-action="purchase"]').disabled = !this.hold;
@@ -310,7 +355,9 @@
         ticketTypeId,
         quantity,
       })),
+      seats: U.clone(selection.seats),
       total: selection.total,
+      savings: selection.savings,
       currency: selection.currency,
       simulated: true,
     };
@@ -384,7 +431,12 @@
     this.data = root.DreamEventLayout.sync(S.normalize(j));
     this.selection.clear();
     this.generalAdmission = {};
-    this.draw();
+    this.filterTicket = '';
+    this.filterSection = '';
+    // Rebuild the UI: filters, ticket list and general-admission inputs depend on the map.
+    this.resizeObserver && this.resizeObserver.disconnect();
+    this.renderer && this.renderer.destroy();
+    this.render();
     return this;
   };
   Selector.prototype.getAvailability = function () {

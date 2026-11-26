@@ -29,7 +29,7 @@
   }
   function makeSelector(data) {
     selector?.destroy();
-    selector = new DreamEventSeatSelector({
+    selector = (window.DreamEventSeatPicker ? DreamEventSeatPicker.create : (c) => new DreamEventSeatSelector(c))({
       container: '#selector',
       data,
       callbacks: {
@@ -51,7 +51,7 @@
     });
     if (name === 'selector') selector?.resize();
   }
-  fetch('examples/auditorium.json')
+  fetch('examples/concert.json')
     .then((response) => response.json())
     .then((data) => {
       builder = new DreamEventSeatMapBuilder({
@@ -75,7 +75,7 @@
   document.querySelector('#copy-json').onclick = () =>
     navigator.clipboard?.writeText(builder.getJSON());
   document.querySelector('#load-example').onclick = () =>
-    fetch('examples/auditorium.json')
+    fetch('examples/concert.json')
       .then((response) => response.json())
       .then((data) => builder.setData(data));
   document.querySelector('#reset-all').onclick = () => {

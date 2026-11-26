@@ -4,3 +4,47 @@
 .de-selector button:disabled {
   cursor: not-allowed;
 }
+.de-selector .btn {
+  white-space: nowrap;
+}
+.de-selector .de-available {
+  background: #7c3aed;
+}
+.de-selector .de-selected {
+  background: #f5f3ff;
+  box-shadow: inset 0 0 0 2px #4c1d95;
+}
+.de-selector .de-held {
+  background: #ddd6fe;
+}
+.de-selector .de-sold {
+  background: #cbd5e1;
+}
+.de-selector .de-blocked {
+  background: #94a3b8;
+}
+.de-selector .de-dot {
+  border-radius: 3px;
+}
+.de-presale-banner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #ecfdf5;
+  color: #065f46;
+  font-size: 12.5px;
+}
+.de-presale-price {
+  color: #047857;
+}
+.de-presale-tag {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: #d1fae5;
+  color: #065f46;
+  font-size: 11px;
+  font-weight: 600;
+}
